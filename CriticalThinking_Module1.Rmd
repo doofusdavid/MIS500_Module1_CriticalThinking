@@ -1,0 +1,91 @@
+---
+title: "Critical Thinking - Module 1 - Option 2"
+author: "David Edwards"
+date: "1/22/2022"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Display the first 6 rows of the built-in Air Quality data set
+
+
+```{r}
+head(airquality)
+```
+## Display the summary statistics for all attributes (columns) of the Air Quality data set.
+
+```{r airquality}
+summary(airquality)
+```
+
+## Select any two attributes of the Air Quality data set. For each of your two selected attributes display:
+
+### Ozone
+#### Mean
+```{r}
+mean(airquality$Ozone, na.rm=TRUE)
+```
+
+#### Median
+```{r}
+median(airquality$Ozone, na.rm=TRUE)
+```
+
+#### Range
+```{r}
+range(airquality$Ozone, na.rm=TRUE)
+```
+
+#### Histogram
+```{r}
+Ozone <- airquality$Ozone[!is.na(airquality$Ozone)]
+hist(Ozone, xlim=c(0,200), xlab="Ozone parts per billion")
+boxplot(Ozone, main="Boxplot of Ozone", xlab="Ozone", ylab="Ozone parts per billion")
+```
+
+### Temp
+#### Mean
+```{r}
+Temperature <- airquality$Temp[!is.na(airquality$Temp)]
+mean(Temperature)
+```
+
+#### Median
+```{r}
+median(Temperature)
+```
+
+#### Range
+```{r}
+range(Temperature)
+```
+
+#### Histogram
+```{r}
+hist(Temperature, xlim=c(50,110), xlab="Temperature (\u00B0F)")
+boxplot(Temperature, main="Temperature Boxplot", xlab="Temperature", ylab="Degrees Fahrenheit")
+```
+
+## For the same two attributes of the Air Quality data set that you selected in step 3, display the correlation between these two attributes
+### statistically via a correlation number
+
+Creating the corellation resulted in an NA because some Ozone levels were NA.  I filtered out the NA Ozone measurements, and the corresponding Temperature elements as well.
+```{r}
+Ozone <- airquality$Ozone[!is.na(airquality$Ozone)]
+Temperature <- airquality$Temp[!is.na(airquality$Ozone)]
+cor(Ozone, Temperature, method=c("pearson", "kendall", "spearman"))
+```
+
+### visually via a scatterplot diagram.
+
+```{r}
+plot(Ozone, Temperature, main="Scatterplot Temp and Ozone", xlab="Ozone (ppb) ", ylab="Temperature (\u00B0F)")
+lines(lowess(Ozone, Temperature), col="blue")
+```
+
+
