@@ -23,6 +23,11 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r}
 head(airquality)
 ```
+```{r}
+date()
+```
+
+
 ## Display the summary statistics for all attributes (columns) of the Air Quality data set.
 
 ```{r airquality}
